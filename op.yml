@@ -1,0 +1,94 @@
+name: github.com/opspec-pkgs/azure.acs.create
+description: creates an azure container service instance (if doesn't already exist)
+inputs:
+  subscriptionId:
+    string:
+      constraints: { minLength: 1 }
+      description: id of azure subscription
+  azureUsername:
+    string:
+      constraints: { format: email }
+      description: email address of azure account
+  azurePassword:
+    string:
+      constraints: { minLength: 1 }
+      description: password of azure account
+      isSecret: true
+  name:
+    string:
+      constraints: { minLength: 1 }
+      description: name of provisioned cluster
+  resourceGroup:
+    string:
+      constraints: { minLength: 1 }
+      description: name of azure resource group
+  adminUsername:
+    string:
+      constraints: { minLength: 4, maxLength: 15 }
+      description: username on provisioned virtual machines
+      default: azureuser
+  agentCount:
+    number:
+      constraints: { format: integer, minimum: 1 }
+      description: number of cluster agents to provision
+      default: 1
+  agentVmSize:
+    string:
+      description: vm size of provisioned cluster agents
+      default: Standard_D2_v2
+  clientSecret:
+    string:
+      constraints: { minLength: 1 }
+      description: client secret of azure service principal for making calls to Azure API's
+  dnsPrefix:
+    string:
+      constraints: { minLength: 1 }
+      description: domain name prefix for the cluster
+  location:
+    string:
+      constraints: { minLength: 1 }
+      description: location of provisioned cluster
+      default: westus
+  masterCount:
+    number:
+      constraints: { format: integer, minimum: 1 }
+      description: number of cluster agents to designate as masters
+      default: 1
+  orchestratorType:
+    string:
+      constraints: { enum: [ Custom, DCOS, Kubernetes, Swarm] }
+      default: DCOS
+  sshKeyValue:
+    file:
+      description: ssh key to add authorized_keys on provisioned cluster agents
+  servicePrincipal:
+    string:
+      constraints: { minLength: 1 }
+      description: id of azure service principal for making calls to Azure API's
+  tags:
+    string:
+      constraints: { minLength: 1 }
+      description: space separated tags in 'Key[=Value]' format
+      default: " "
+run:
+  container:
+    image: { ref: 'azuresdk/azure-cli-python:0.2.10' }
+    cmd: [ /cmd.sh ]
+    files: { /cmd.sh, /sshKeyValue: sshKeyValue }
+    envVars:
+      subscriptionId:
+      azureUsername:
+      azurePassword:
+      name:
+      resourceGroup:
+      adminUsername:
+      agentCount:
+      agentVmSize:
+      clientSecret:
+      dnsPrefix:
+      location:
+      masterCount:
+      orchestratorType:
+      servicePrincipal:
+      sshKeyFile:
+      tags:
