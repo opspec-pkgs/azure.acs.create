@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo "logging in to azure"
-az login -u "$azureUsername" -p "$azurePassword"
+az login -u "$azureUsername" -p "$azurePassword" >/dev/null
 
 echo "setting default subscription"
 az account set --subscription "$subscriptionId"
