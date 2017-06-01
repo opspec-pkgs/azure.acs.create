@@ -24,6 +24,5 @@ else
     --master-count "$masterCount" \
     --orchestrator-type "$orchestratorType" \
     --service-principal "$servicePrincipal" \
-    --ssh-key-value "/sshKeyValue" \
-    --tags "$tags"
+    --ssh-key-value "/sshKeyValue"
 fi
