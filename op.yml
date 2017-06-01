@@ -65,11 +65,6 @@ inputs:
     string:
       constraints: { minLength: 1 }
       description: id of azure service principal for making calls to Azure API's
-  tags:
-    string:
-      constraints: { minLength: 1 }
-      description: space separated tags in 'Key[=Value]' format
-      default: " "
 run:
   container:
     image: { ref: 'azuresdk/azure-cli-python:0.2.10' }
@@ -91,4 +86,3 @@ run:
       orchestratorType:
       servicePrincipal:
       sshKeyFile:
-      tags:
