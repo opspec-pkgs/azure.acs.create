@@ -25,6 +25,13 @@ inputs:
     string:
       constraints: { minLength: 1 }
       description: name of azure resource group
+  dnsPrefix:
+    string:
+      constraints: { minLength: 1, pattern: '^[a-z][a-z0-9-]{1,61}[a-z0-9]$' }
+      description: domain name prefix for the cluster
+  sshKeyValue:
+    file:
+      description: ssh key added to authorized_keys on provisioned cluster agents
   adminUsername:
     string:
       constraints: { minLength: 4, maxLength: 15 }
@@ -39,10 +46,6 @@ inputs:
     string:
       description: vm size of provisioned cluster agents
       default: Standard_D2_v2
-  dnsPrefix:
-    string:
-      constraints: { minLength: 1, pattern: '^[a-z][a-z0-9-]{1,61}[a-z0-9]$' }
-      description: domain name prefix for the cluster
   location:
     string:
       constraints: { minLength: 1 }
@@ -57,9 +60,6 @@ inputs:
     string:
       constraints: { enum: [Custom, DCOS, Kubernetes, Swarm] }
       default: DCOS
-  sshKeyValue:
-    file:
-      description: ssh key added to authorized_keys on provisioned cluster agents
 run:
   container:
     image: { ref: 'azuresdk/azure-cli-python:0.2.10' }
@@ -72,11 +72,11 @@ run:
       spClientSecret:
       name:
       resourceGroup:
+      dnsPrefix:
+      sshKeyValue:
       adminUsername:
       agentCount:
       agentVmSize:
-      dnsPrefix:
       location:
       masterCount:
       orchestratorType:
-      sshKeyValue:

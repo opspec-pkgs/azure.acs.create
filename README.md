@@ -30,15 +30,15 @@ run:
       spClientSecret:
       name:
       resourceGroup:
+      dnsPrefix:
+      sshKeyValue:
+      # begin optional args
       adminUsername:
       agentCount:
       agentVmSize:
-      clientSecret:
-      dnsPrefix:
       location:
       masterCount:
       orchestratorType:
-      sshKeyValue:
-      servicePrincipal:
+      # end optional args
 ```
 
