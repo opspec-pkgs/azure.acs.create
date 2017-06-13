@@ -24,20 +24,21 @@ run:
   op:
     pkg: { ref: github.com/opspec-pkgs/azure.acs.create#VERSION }
     inputs: 
-      subscriptionId: ~
-      azureUsername: ~
-      azurePassword: ~
-      name: ~
-      resourceGroup: ~
-      adminUsername: ~
-      agentCount: ~
-      agentVmSize: ~
-      clientSecret: ~
-      dnsPrefix: ~
-      location: ~
-      masterCount: ~
-      orchestratorType: ~
-      sshKeyValue: ~
-      servicePrincipal: ~
+      subscriptionId:
+      spId:
+      spTenantId:
+      spClientSecret:
+      name:
+      resourceGroup:
+      adminUsername:
+      agentCount:
+      agentVmSize:
+      clientSecret:
+      dnsPrefix:
+      location:
+      masterCount:
+      orchestratorType:
+      sshKeyValue:
+      servicePrincipal:
 ```
 

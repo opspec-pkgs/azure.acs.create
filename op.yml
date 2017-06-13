@@ -5,15 +5,18 @@ inputs:
     string:
       constraints: { minLength: 1 }
       description: id of azure subscription
-  azureUsername:
-    string:
-      constraints: { format: email }
-      description: email address of azure account
-  azurePassword:
+  spId:
     string:
       constraints: { minLength: 1 }
-      description: password of azure account
-      isSecret: true
+      description: id of service principal (or app) making calls to Azure API's
+  spTenantId:
+    string:
+      constraints: { minLength: 1 }
+      description: tenant id (directory id) of service principal (or app) making calls to Azure API's
+  spClientSecret:
+    string:
+      constraints: { minLength: 1 }
+      description: client secret of service principal (or app) making calls to Azure API's
   name:
     string:
       constraints: { minLength: 1 }
@@ -36,13 +39,9 @@ inputs:
     string:
       description: vm size of provisioned cluster agents
       default: Standard_D2_v2
-  clientSecret:
-    string:
-      constraints: { minLength: 1 }
-      description: client secret of azure service principal for making calls to Azure API's
   dnsPrefix:
     string:
-      constraints: { minLength: 1 }
+      constraints: { minLength: 1, pattern: '^[a-z][a-z0-9-]{1,61}[a-z0-9]$' }
       description: domain name prefix for the cluster
   location:
     string:
@@ -56,15 +55,11 @@ inputs:
       default: 1
   orchestratorType:
     string:
-      constraints: { enum: [ Custom, DCOS, Kubernetes, Swarm] }
+      constraints: { enum: [Custom, DCOS, Kubernetes, Swarm] }
       default: DCOS
   sshKeyValue:
     file:
-      description: ssh key to add authorized_keys on provisioned cluster agents
-  servicePrincipal:
-    string:
-      constraints: { minLength: 1 }
-      description: id of azure service principal for making calls to Azure API's
+      description: ssh key added to authorized_keys on provisioned cluster agents
 run:
   container:
     image: { ref: 'azuresdk/azure-cli-python:0.2.10' }
@@ -72,17 +67,16 @@ run:
     files: { /cmd.sh, /sshKeyValue: sshKeyValue }
     envVars:
       subscriptionId:
-      azureUsername:
-      azurePassword:
+      spId:
+      spTenantId:
+      spClientSecret:
       name:
       resourceGroup:
       adminUsername:
       agentCount:
       agentVmSize:
-      clientSecret:
       dnsPrefix:
       location:
       masterCount:
       orchestratorType:
-      servicePrincipal:
       sshKeyValue:

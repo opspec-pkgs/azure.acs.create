@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 echo "logging in to azure"
-az login -u "$azureUsername" -p "$azurePassword" >/dev/null
+az login --service-principal -u "$spId" -p "$spClientSecret" --tenant "$spTenantId" >/dev/null
 
 echo "setting default subscription"
 az account set --subscription "$subscriptionId"
@@ -18,11 +18,11 @@ else
     --admin-username "$adminUsername" \
     --agent-count "$agentCount" \
     --agent-vm-size "$agentVmSize" \
-    --client-secret "$clientSecret" \
+    --client-secret "$spClientSecret" \
     --dns-prefix "$dnsPrefix" \
     --location "$location" \
     --master-count "$masterCount" \
     --orchestrator-type "$orchestratorType" \
-    --service-principal "$servicePrincipal" \
+    --service-principal "$spId" \
     --ssh-key-value "/sshKeyValue"
 fi
