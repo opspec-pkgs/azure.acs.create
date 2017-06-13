@@ -85,4 +85,4 @@ run:
       masterCount:
       orchestratorType:
       servicePrincipal:
-      sshKeyFile:
+      sshKeyValue:
