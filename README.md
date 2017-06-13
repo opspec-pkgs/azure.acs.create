@@ -39,6 +39,5 @@ run:
       orchestratorType: ~
       sshKeyValue: ~
       servicePrincipal: ~
-      tags: ~
 ```
 
