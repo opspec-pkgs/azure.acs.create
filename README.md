@@ -25,9 +25,8 @@ run:
     pkg: { ref: github.com/opspec-pkgs/azure.acs.create#VERSION }
     inputs: 
       subscriptionId:
-      spId:
-      spTenantId:
-      spClientSecret:
+      loginId:
+      loginSecret:
       name:
       resourceGroup:
       dnsPrefix:
@@ -36,9 +35,13 @@ run:
       adminUsername:
       agentCount:
       agentVmSize:
+      clientSecret:
       location:
+      loginTenantId:
+      loginType:
       masterCount:
       orchestratorType:
+      servicePrincipal:
       # end optional args
 ```
 

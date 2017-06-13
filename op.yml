@@ -5,18 +5,14 @@ inputs:
     string:
       constraints: { minLength: 1 }
       description: id of azure subscription
-  spId:
+  loginId:
     string:
       constraints: { minLength: 1 }
-      description: id of service principal (or app) making calls to Azure API's
-  spTenantId:
+      description: id of user, service principal, or app to login with
+  loginSecret:
     string:
       constraints: { minLength: 1 }
-      description: tenant id (directory id) of service principal (or app) making calls to Azure API's
-  spClientSecret:
-    string:
-      constraints: { minLength: 1 }
-      description: client secret of service principal (or app) making calls to Azure API's
+      description: secret of user, service principal, or app to login with
   name:
     string:
       constraints: { minLength: 1 }
@@ -46,11 +42,25 @@ inputs:
     string:
       description: vm size of provisioned cluster agents
       default: Standard_D2_v2
+  clientSecret:
+    string:
+      constraints: { minLength: 1 }
+      description: client secret of azure service principal for making calls to Azure API's
   location:
     string:
       constraints: { minLength: 1 }
       description: location of provisioned cluster
       default: westus
+  loginTenantId:
+    string:
+      constraints: { minLength: 1 }
+      description: tenant id of user, service principal, or app to login with
+      default: " "
+  loginType:
+    string:
+      constraints: { enum: [user, sp]}
+      description: type of login; 'user' (default) or 'sp' for service principal
+      default: user
   masterCount:
     number:
       constraints: { format: integer, minimum: 1 }
@@ -60,6 +70,10 @@ inputs:
     string:
       constraints: { enum: [Custom, DCOS, Kubernetes, Swarm] }
       default: DCOS
+  servicePrincipal:
+    string:
+      constraints: { minLength: 1 }
+      description: id of azure service principal for making calls to Azure API's
 run:
   container:
     image: { ref: 'azuresdk/azure-cli-python:0.2.10' }
@@ -67,9 +81,8 @@ run:
     files: { /cmd.sh, /sshKeyValue: sshKeyValue }
     envVars:
       subscriptionId:
-      spId:
-      spTenantId:
-      spClientSecret:
+      loginId:
+      loginSecret:
       name:
       resourceGroup:
       dnsPrefix:
@@ -77,6 +90,10 @@ run:
       adminUsername:
       agentCount:
       agentVmSize:
+      clientSecret:
       location:
+      loginTenantId:
+      loginType:
       masterCount:
       orchestratorType:
+      servicePrincipal:
