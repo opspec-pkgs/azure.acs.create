@@ -46,6 +46,7 @@ inputs:
     string:
       constraints: { minLength: 1 }
       description: client secret of azure service principal for making calls to Azure API's
+      default: " "
   location:
     string:
       constraints: { minLength: 1 }
@@ -74,6 +75,7 @@ inputs:
     string:
       constraints: { minLength: 1 }
       description: id of azure service principal for making calls to Azure API's
+      default: " "
 run:
   container:
     image: { ref: 'azuresdk/azure-cli-python:0.2.10' }
