@@ -25,6 +25,10 @@ run:
         outputs:
           imageTar:
     - op:
+        pkg: { ref: github.com/opspec-pkgs/git.repo.resolve-commit#1.0.0 }
+        inputs: { dotGitDir: $(pkg)/.git }
+        outputs: { commit: }
+    - op:
         pkg: { ref: github.com/opspec-pkgs/github.release.create#1.0.0 }
         inputs:
           owner: opspec-pkgs
@@ -32,5 +36,5 @@ run:
           loginUsername: $(githubUsername)
           loginPassword: $(githubPassword)
           tag: $(version)
-          commitish: head
+          commitish: $(commit)
           name: $(version)
