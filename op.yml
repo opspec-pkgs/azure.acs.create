@@ -77,6 +77,7 @@ inputs:
       constraints: { minLength: 1 }
       description: id of azure service principal for making calls to Azure API's
       default: " "
+version: 2.0.0
 run:
   container:
     image: { ref: 'azuresdk/azure-cli-python:0.2.10' }

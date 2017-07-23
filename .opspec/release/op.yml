@@ -1,0 +1,36 @@
+name: release
+description: releases the package
+inputs:
+  version:
+    string:
+      constraints: { format: semver }
+  githubUsername:
+    string:
+      constraints: { minLength: 1 }
+      description: user for logging in to github
+  githubPassword:
+    string:
+      constraints: { minLength: 1 }
+      description: password for logging in to github
+      isSecret: true
+  pkg:
+    dir:
+      default: .
+run:
+  serial:
+    - op:
+        pkg: { ref: build }
+        inputs:
+          pkg:
+        outputs:
+          imageTar:
+    - op:
+        pkg: { ref: github.com/opspec-pkgs/github.release.create#1.0.0 }
+        inputs:
+          owner: opspec-pkgs
+          repo: azure.acs.create
+          loginUsername: $(githubUsername)
+          loginPassword: $(githubPassword)
+          tag: $(version)
+          commitish: head
+          name: $(version)
