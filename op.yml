@@ -50,9 +50,9 @@ inputs:
       default: " "
   location:
     string:
-      constraints: { minLength: 1 }
+      constraints: { enum: [ukwest, uksouth, westcentralus, westus2, canadaeast, canadacentral, westindia, southindia, centralindia] }
       description: location of provisioned cluster
-      default: westus
+      default: westus2
   loginTenantId:
     string:
       constraints: { minLength: 1 }
@@ -76,6 +76,35 @@ inputs:
     string:
       constraints: { minLength: 1 }
       description: id of azure service principal for making calls to Azure API's
+      default: " "
+  agentDiskSize:
+    number:
+      constraints: { format: integer, minimum: 1 }
+      description: set disk size for agent pools vms. unit in GB
+      default: 30
+  agentStorageProfile:
+    string:
+      constraints: { enum: [ManagedDisks, StorageAccount] }
+      default: " "
+  agentVnetSubnetId:
+    string:
+      constraints: { minLength: 1 }
+      description: set custom vnet subnet id for agent pools. agent need to used the same vnet if master set
+      default: " "
+  masterVnetSubnetId:
+    string:
+      constraints: { minLength: 1 }
+      description: set custom vnet subnet id for master pools. agent need to used the same vnet if master set
+      default: " "
+  masterDiskSize:
+    number:
+      constraints: { format: integer, minimum: 1 }
+      description: set disk size for master pool vms. unit in GB
+      default: 30
+  masterFirstStaticIP:
+    string:
+      constraints: { minLength: 1 }
+      description: set the first consecutive ip used to specify static ip block
       default: " "
 version: 2.0.0
 run:
@@ -101,3 +130,9 @@ run:
       masterCount:
       orchestratorType:
       servicePrincipal:
+      agentDiskSize:
+      agentStorageProfile:
+      agentVnetSubnetId:
+      masterVnetSubnetId:
+      masterDiskSize:
+      masterFirstStaticIP:

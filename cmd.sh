@@ -50,6 +50,32 @@ else
     acsCreateCmd=$(printf "%s --service-principal %s" "$acsCreateCmd" "$servicePrincipal")
   fi
 
+# add vnet, disk agent disk size, consecutive IP. 
+
+  if [ "$agentDiskSize" != 30 ]; then
+    acsCreateCmd=$(printf "%s --agent-osdisk-size %s" "$acsCreateCmd" "$agentDiskSize")
+  fi
+
+  if [ "$agentVnetSubnetId" != " " ]; then
+    acsCreateCmd=$(printf "%s --agent-vnet-subnet-id %s" "$acsCreateCmd" "$agentVnetSubnetId")
+  fi
+
+  if [ "$masterVnetSubnetId" != " " ]; then
+    acsCreateCmd=$(printf "%s --master-vnet-subnet-id %s" "$acsCreateCmd" "$masterVnetSubnetId")
+  fi
+
+  if [ "$masterDiskSize" != 30 ]; then
+    acsCreateCmd=$(printf "%s --master-osdisk-size %s" "$acsCreateCmd" "$masterDiskSize")
+  fi
+
+  if [ "$masterFirstStaticIP" != " " ]; then
+    acsCreateCmd=$(printf "%s --master-first-consecutive-static-ip %s" "$acsCreateCmd" "$masterFirstStaticIP")
+  fi
+
+  if [ "$agentStorageProfile" != " " ]; then
+    acsCreateCmd=$(printf "%s --agent-storage-profile %s" "$acsCreateCmd" "$agentStorageProfile")
+  fi
+
   echo "creating ACS instance"
   eval "$acsCreateCmd"
 fi

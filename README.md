@@ -45,6 +45,12 @@ op:
     masterCount:
     orchestratorType:
     servicePrincipal:
+    agentDiskSize:
+    agentStorageProfile:
+    agentVnetSubnetId:
+    masterVnetSubnetId:
+    masterDiskSize:
+    masterFirstStaticIP:
     # end optional args
 ```
 
