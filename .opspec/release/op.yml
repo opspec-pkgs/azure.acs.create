@@ -16,6 +16,15 @@ inputs:
   pkg:
     dir:
       default: .
+  dockerUsername:
+    string:
+      constraints: { minLength: 1 }
+      description: user for logging in to docker hub
+  dockerPassword:
+    string:
+      constraints: { minLength: 1 }
+      description: password for logging in to docker hub
+      isSecret: true
 run:
   serial:
     - op:
@@ -24,6 +33,13 @@ run:
           pkg:
         outputs:
           imageTar:
+    - op:
+        pkg: { ref: github.com/opspec-pkgs/docker.image.push#1.1.0 }
+        inputs:
+          imageTar:
+          imageName: 'opspecpkgs/azure.acs.create:$(version)'
+          username: $(dockerUsername)
+          password: $(dockerPassword)
     - op:
         pkg: { ref: github.com/opspec-pkgs/git.repo.resolve-commit#1.0.0 }
         inputs: { dotGitDir: $(pkg)/.git }

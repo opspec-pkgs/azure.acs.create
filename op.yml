@@ -108,31 +108,49 @@ inputs:
       default: " "
 version: 2.1.0
 run:
-  container:
-    image: { ref: 'azuresdk/azure-cli-python:2.0.15' }
-    cmd: [ /cmd.sh ]
-    files: { /cmd.sh, /sshKeyValue: sshKeyValue }
-    envVars:
-      subscriptionId:
-      loginId:
-      loginSecret:
-      name:
-      resourceGroup:
-      dnsPrefix:
-      sshKeyValue:
-      adminUsername:
-      agentCount:
-      agentVmSize:
-      clientSecret:
-      location:
-      loginTenantId:
-      loginType:
-      masterCount:
-      orchestratorType:
-      servicePrincipal:
-      agentDiskSize:
-      agentStorageProfile:
-      agentVnetSubnetId:
-      masterVnetSubnetId:
-      masterDiskSize:
-      masterFirstStaticIP:
+  serial:
+# generate cluster definition using envsub
+
+# generate ARM template/parameters using acs-engine
+    - container:
+        image: { ref: 'microsoft/acs-engine:latest' }
+        cmd: [ /cmd.sh ]
+        files: { /cmd.sh, /sshKeyValue: sshKeyValue, /clusterDefinition.json }
+        envVars:
+          subscriptionId:
+          loginId:
+          loginSecret:
+          name:
+          resourceGroup:
+          dnsPrefix:
+          sshKeyValue:
+          adminUsername:
+          agentCount:
+          agentVmSize:
+          clientSecret:
+          location:
+          loginTenantId:
+          loginType:
+          masterCount:
+          orchestratorType:
+          servicePrincipal:
+          agentDiskSize:
+          agentStorageProfile:
+          agentVnetSubnetId:
+          masterVnetSubnetId:
+          masterDiskSize:
+          masterFirstStaticIP:
+# outputs will be params and template
+    # - op:
+    #     pkg: { ref: github.com/opspec-pkgs/azure.group.deployment.create#1.0.0 }
+    #     inputs:
+    #       subscriptionId:
+    #       loginId:
+    #       loginSecret:
+    #       resourceGroup:
+    #       name:
+    #       parameters:
+    #       template:
+    #       loginTenantId:
+    #       loginType:
+    #       mode:

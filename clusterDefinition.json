@@ -1,0 +1,41 @@
+{
+    "apiVersion": "vlabs",
+    "properties": {
+      "orchestratorProfile": {
+        "orchestratorType": "$orchestratorType"
+      },
+      "masterProfile": {
+        "count": $masterCount,
+        "dnsPrefix": "$dnsPrefix",
+        "vmSize": "Standard_D2_v2",
+        "OSDiskSizeGB": $masterDiskSize,
+        "vnetSubnetId": "$masterVnetSubnetId",
+        "firstConsecutiveStaticIP": "$masterFirstStaticIP"
+      },
+      "agentPoolProfiles": [
+        {
+          "name": "$name",
+          "count": $agentCount,
+          "vmSize": "$agentVmSize",
+          "OSDiskSizeGB": $agentDiskSize,
+          "availabilityProfile": "AvailabilitySet",
+          "storageProfile": "$agentStorageProfile",
+          "vnetSubnetId": "$agentVnetSubnetId"
+        }
+      ],
+      "linuxProfile": {
+        "adminUsername": "$adminUsername",
+        "ssh": {
+          "publicKeys": [
+            {
+              "keyData": "$sshKeyValue"
+            }
+          ]
+        }
+      },
+      "servicePrincipalProfile": {
+        "clientId": "$servicePrincipal",
+        "secret": "$clientSecret"
+      }
+    }
+  }

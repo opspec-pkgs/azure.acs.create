@@ -4,8 +4,35 @@ inputs:
   pkg:
     dir:
       default: .
+  version:
+    string:
+      constraints: { format: semver }
+      default: 0.0.0
+  dockerfile:
+    file:
+      default: /Dockerfile
+  # dockerUsername:
+  #   string:
+  #     constraints: { minLength: 1 }
+  #     description: user for logging in to docker hub
+  # dockerPassword:
+  #   string:
+  #     constraints: { minLength: 1 }
+  #     description: password for logging in to docker hub
+  #     isSecret: true
 run:
   serial:
     - op:
         pkg: { ref: test }
         inputs: { pkg }
+    - op:
+        pkg: { ref: github.com/opspec-pkgs/docker.image.build#1.1.0 }
+        inputs: { dockerfile, imageName: 'opspecpkgs/azure.acs.create:$(version)' }
+        outputs: { imageTar }
+    # - op:
+    #     pkg: { ref: github.com/opspec-pkgs/docker.image.push#1.1.0 }
+    #     inputs:
+    #       imageTar:
+    #       imageName: 'opspecpkgs/azure.acs.create:$(version)'
+    #       username: $(dockerUsername)
+    #       password: $(dockerPassword)
