@@ -34,6 +34,10 @@ inputs:
       constraints: { minLength: 4, maxLength: 15 }
       description: username on provisioned virtual machines
       default: azureuser
+  agentPoolName:
+    string:
+      constraints: { minLength: 4, maxLength: 12 }
+      description: name of agent pool
   agentCount:
     number:
       constraints: { format: integer, minimum: 1 }
@@ -50,9 +54,9 @@ inputs:
       default: " "
   location:
     string:
-      constraints: { enum: [ukwest, uksouth, westcentralus, westus2, canadaeast, canadacentral, westindia, southindia, centralindia] }
+      constraints: { minLength: 1 }
       description: location of provisioned cluster
-      default: westus2
+      default: westus
   loginTenantId:
     string:
       constraints: { minLength: 1 }
@@ -68,6 +72,10 @@ inputs:
       constraints: { format: integer, minimum: 1 }
       description: number of cluster agents to designate as masters
       default: 1
+  masterVmSize:
+    string:
+      description: vm size of provisioned cluster masters
+      default: Standard_D2_v2
   orchestratorType:
     string:
       constraints: { enum: [Custom, DCOS, Kubernetes, Swarm] }
@@ -106,25 +114,42 @@ inputs:
       constraints: { minLength: 1 }
       description: set the first consecutive ip used to specify static ip block
       default: " "
+  mode:
+    string:
+      constraints: { enum: [ Incremental, Complete ] }
+      description: mode of deployment; either incremental (only add resources to resource group) or complete (remove extra resources from resource group)
+      default: Incremental
 version: 2.1.0
 run:
   serial:
-# generate cluster definition using envsub
-
-# generate ARM template/parameters using acs-engine
+    - op:
+        pkg: { ref: github.com/opspec-pkgs/azure.group.create#2.0.0 }
+        inputs:
+          subscriptionId:
+          loginId:
+          loginSecret:
+          location:
+          name: $(resourceGroup)
+          loginTenantId:
+          loginType:
     - container:
-        image: { ref: 'microsoft/acs-engine:latest' }
+        image: { ref: 'opspecpkgs/azure.acs.create:0.0.0' }
         cmd: [ /cmd.sh ]
-        files: { /cmd.sh, /sshKeyValue: sshKeyValue, /clusterDefinition.json }
+        files: 
+          /cmd.sh: /cmd.sh
+          /sshKeyValue: sshKeyValue
+          /clusterDefinition.json: /clusterDefinition.json
         envVars:
           subscriptionId:
           loginId:
           loginSecret:
           name:
           resourceGroup:
+          mode:
           dnsPrefix:
           sshKeyValue:
           adminUsername:
+          agentPoolName:
           agentCount:
           agentVmSize:
           clientSecret:
@@ -132,6 +157,7 @@ run:
           loginTenantId:
           loginType:
           masterCount:
+          masterVmSize:
           orchestratorType:
           servicePrincipal:
           agentDiskSize:
@@ -140,17 +166,3 @@ run:
           masterVnetSubnetId:
           masterDiskSize:
           masterFirstStaticIP:
-# outputs will be params and template
-    # - op:
-    #     pkg: { ref: github.com/opspec-pkgs/azure.group.deployment.create#1.0.0 }
-    #     inputs:
-    #       subscriptionId:
-    #       loginId:
-    #       loginSecret:
-    #       resourceGroup:
-    #       name:
-    #       parameters:
-    #       template:
-    #       loginTenantId:
-    #       loginType:
-    #       mode:

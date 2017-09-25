@@ -34,6 +34,7 @@ op:
     resourceGroup:
     dnsPrefix:
     sshKeyValue:
+    mode:
     # begin optional args
     adminUsername:
     agentCount:
@@ -43,6 +44,7 @@ op:
     loginTenantId:
     loginType:
     masterCount:
+    masterVmSize:
     orchestratorType:
     servicePrincipal:
     agentDiskSize:

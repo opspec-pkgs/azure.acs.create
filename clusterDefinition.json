@@ -7,14 +7,14 @@
       "masterProfile": {
         "count": $masterCount,
         "dnsPrefix": "$dnsPrefix",
-        "vmSize": "Standard_D2_v2",
+        "vmSize": "$masterVmSize",
         "OSDiskSizeGB": $masterDiskSize,
         "vnetSubnetId": "$masterVnetSubnetId",
         "firstConsecutiveStaticIP": "$masterFirstStaticIP"
       },
       "agentPoolProfiles": [
         {
-          "name": "$name",
+          "name": "$agentPoolName",
           "count": $agentCount,
           "vmSize": "$agentVmSize",
           "OSDiskSizeGB": $agentDiskSize,
@@ -28,7 +28,7 @@
         "ssh": {
           "publicKeys": [
             {
-              "keyData": "$sshKeyValue"
+              "keyData": "$sshKeyValueString"
             }
           ]
         }
