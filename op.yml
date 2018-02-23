@@ -50,7 +50,7 @@ inputs:
       default: " "
   location:
     string:
-      constraints: { enum: [ukwest, uksouth, westcentralus, westus2, canadaeast, canadacentral, westindia, southindia, centralindia] }
+      constraints: { minLength: 1 }
       description: location of provisioned cluster
       default: westus2
   loginTenantId:
@@ -84,7 +84,7 @@ inputs:
       default: 30
   agentStorageProfile:
     string:
-      constraints: { enum: [ManagedDisks, StorageAccount] }
+      constraints: { minLength: 1 }
       default: " "
   agentVnetSubnetId:
     string:
