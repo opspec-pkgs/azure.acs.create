@@ -12,20 +12,20 @@ creates an azure container service instance (if doesn't already exist)
 ## install
 
 ```shell
-opctl pkg install github.com/opspec-pkgs/azure.acs.create#VERSION
+opctl pkg install github.com/opspec-pkgs/azure.acs.create#2.1.1
 ```
 
 ## run
 
 ```
-opctl run github.com/opspec-pkgs/azure.acs.create#VERSION
+opctl run github.com/opspec-pkgs/azure.acs.create#2.1.1
 ```
 
 ## compose
 
 ```yaml
 op:
-  pkg: { ref: github.com/opspec-pkgs/azure.acs.create#VERSION }
+  pkg: { ref: github.com/opspec-pkgs/azure.acs.create#2.1.1 }
   inputs: 
     subscriptionId:
     loginId:
