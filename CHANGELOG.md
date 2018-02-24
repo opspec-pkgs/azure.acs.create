@@ -5,8 +5,15 @@ accordance with [![keepachangelog 1.0.0](https://img.shields.io/badge/keepachang
 
 ## \[Unreleased]
 
+## \[2.1.1] - 2018-02-23
+
+### Fixed
+- remove constraint for regions from location input
+
 ## \[2.1.0] - 2017-09-21
-allow for custom vnet, disk size, and storage profile
+
+### Added
+- allow for custom vnet, disk size, and storage profile
 
 ## \[2.0.0] - 2017-07-14
 
