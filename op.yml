@@ -111,7 +111,7 @@ run:
   container:
     image: { ref: 'azuresdk/azure-cli-python:2.0.15' }
     cmd: [ /cmd.sh ]
-    files: { /cmd.sh, /sshKeyValue: sshKeyValue }
+    files: { /cmd.sh, /sshKeyValue: $(sshKeyValue) }
     envVars:
       subscriptionId:
       loginId:
