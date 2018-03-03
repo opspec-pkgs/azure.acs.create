@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/opspec-pkgs/azure.acs.create.svg?branch=master)](https://travis-ci.org/opspec-pkgs/azure.acs.create)
 
+<img src="icon.svg" alt="icon" height="100px">
 
 # Problem statement
 
@@ -29,30 +30,30 @@ opctl run github.com/opspec-pkgs/azure.acs.create#2.1.1
 op:
   pkg: { ref: github.com/opspec-pkgs/azure.acs.create#2.1.1 }
   inputs:
-    dnsPrefix:
+    subscriptionId:
     loginId:
     loginSecret:
     name:
     resourceGroup:
+    dnsPrefix:
     sshKeyValue:
-    subscriptionId:
     # params w/ default
     adminUsername:
     agentCount:
-    agentDiskSize:
-    agentStorageProfile:
     agentVmSize:
-    agentVnetSubnetId:
     clientSecret:
     location:
     loginTenantId:
     loginType:
     masterCount:
-    masterDiskSize:
-    masterFirstStaticIP:
-    masterVnetSubnetId:
     orchestratorType:
     servicePrincipal:
+    agentDiskSize:
+    agentStorageProfile:
+    agentVnetSubnetId:
+    masterVnetSubnetId:
+    masterDiskSize:
+    masterFirstStaticIP:
 ```
 
 # Support
