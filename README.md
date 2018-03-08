@@ -15,20 +15,20 @@ this version of the pkg is in [![opspec 0.1.5](https://img.shields.io/badge/opsp
 ## Install
 
 ```shell
-opctl pkg install github.com/opspec-pkgs/azure.acs.create#2.1.1
+opctl pkg install github.com/opspec-pkgs/azure.acs.create#2.2.0
 ```
 
 ## Run
 
 ```
-opctl run github.com/opspec-pkgs/azure.acs.create#2.1.1
+opctl run github.com/opspec-pkgs/azure.acs.create#2.2.0
 ```
 
 ## Compose
 
 ```yaml
 op:
-  pkg: { ref: github.com/opspec-pkgs/azure.acs.create#2.1.1 }
+  pkg: { ref: github.com/opspec-pkgs/azure.acs.create#2.2.0 }
   inputs:
     subscriptionId:
     loginId:

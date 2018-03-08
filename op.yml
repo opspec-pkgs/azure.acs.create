@@ -106,12 +106,14 @@ inputs:
       constraints: { minLength: 1 }
       description: set the first consecutive ip used to specify static ip block
       default: " "
-version: 2.1.1
+version: 2.2.0
 run:
   container:
     image: { ref: 'azuresdk/azure-cli-python:2.0.15' }
     cmd: [ /cmd.sh ]
-    files: { /cmd.sh, /sshKeyValue: $(sshKeyValue) }
+    files:
+      /cmd.sh:
+      /sshKeyValue: $(sshKeyValue)
     envVars:
       subscriptionId:
       loginId:

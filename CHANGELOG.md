@@ -5,6 +5,12 @@ accordance with [![keepachangelog 1.0.0](https://img.shields.io/badge/keepachang
 
 ## \[Unreleased]
 
+## \[2.2.0] - 2018-03-07
+
+### Added
+
+- opspec 0.1.6 compatibility
+
 ## \[2.1.1] - 2018-02-23
 
 ### Fixed
